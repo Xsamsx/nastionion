@@ -46,27 +46,6 @@
     overscroll-behavior-y: none;
   }
 
-  body::before,
-  body::after {
-    content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 9998;
-    pointer-events: none;
-    background-color: #1E3A2F;
-  }
-
-  body::before {
-    top: 0;
-    height: env(safe-area-inset-top, 0px);
-  }
-
-  body::after {
-    bottom: 0;
-    height: env(safe-area-inset-bottom, 0px);
-  }
-
   @media (min-width: 768px) {
     body {
       cursor: none;
