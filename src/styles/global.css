@@ -18,7 +18,7 @@
 @layer base {
   html {
     scroll-behavior: auto; /* Handled by Lenis */
-    background-color: var(--color-forest); /* Match top section for seamless overscroll */
+    overscroll-behavior: none; /* Disable bounce on mobile */
   }
 
   body {
@@ -27,6 +27,7 @@
     color: var(--color-ink);
     line-height: 1.6;
     overflow-x: hidden;
+    overscroll-behavior: none; /* Disable bounce on mobile */
   }
 
   h1, h2, h3, h4, h5, h6 {
