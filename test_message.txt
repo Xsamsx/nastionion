@@ -1,0 +1,12 @@
+You were totally right! I investigated why the light wasn't showing, and it was a subtle layering (z-index) issue.
+
+Because the WebGL 3D canvas is full-screen, it was rendering exactly *on top* of the glow shapes, hiding them completely. 
+
+I just completely fixed it by:
+1. Re-ordering the HTML so the WebGL canvas is at `z-0` (the very back).
+2. Placing the new Sunflower and Terracotta glows at `z-10` so they float **above** the 3D shapes but **below** the main text.
+3. Adding a `mix-blend-screen` CSS property and intensifying the blur radius to `100px`. This forces the light to beautifully "bleed" and interact with the dark green background, making it extremely visible.
+
+If you refresh the page, you will now clearly see a massive, warm yellow/terracotta light illuminating the bottom-left corner right behind the "Available for projects" text!
+
+Is there anything else you'd like to adjust, or should we move on to that Selected Works gallery?
