@@ -21,6 +21,7 @@
     margin: 0;
     padding: 0;
     scroll-behavior: auto; /* Handled by Lenis */
+    background: linear-gradient(to bottom, #1E3A2F 0%, #1E3A2F 50%, #1A1A1A 50%, #1A1A1A 100%);
   }
 
   body {
@@ -30,6 +31,7 @@
     font-family: var(--font-sans);
     color: var(--color-ink);
     line-height: 1.6;
+    background: transparent;
   }
 
   @media (min-width: 768px) {
