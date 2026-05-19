@@ -18,16 +18,15 @@
 @layer base {
   html {
     scroll-behavior: auto; /* Handled by Lenis */
-    overscroll-behavior: none; /* Disable bounce on mobile */
+    background-color: #1E3A2F; /* Match Hero to fill safe areas/overscroll */
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-ink);
+    background-color: #1E3A2F; /* Match Hero to fill safe areas/overscroll */
     color: var(--color-ink);
     line-height: 1.6;
     overflow-x: hidden;
-    overscroll-behavior: none; /* Disable bounce on mobile */
   }
 
   h1, h2, h3, h4, h5, h6 {
