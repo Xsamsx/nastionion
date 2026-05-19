@@ -17,16 +17,30 @@
 
 @layer base {
   html {
+    height: 100%;
     scroll-behavior: auto; /* Handled by Lenis */
     background-color: #1E3A2F; /* Match Hero to fill safe areas/overscroll */
   }
 
   body {
+    height: 100%;
     font-family: var(--font-sans);
     background-color: #1E3A2F; /* Match Hero to fill safe areas/overscroll */
     color: var(--color-ink);
     line-height: 1.6;
-    overflow-x: hidden;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      cursor: none;
+      overflow-x: hidden;
+    }
+  }
+
+  @media (max-width: 767px) {
+    body {
+      overflow-x: hidden; /* Prevent horizontal scroll but allow vertical bounce */
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
