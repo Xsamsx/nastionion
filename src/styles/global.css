@@ -16,27 +16,27 @@
 }
 
 @layer base {
-  html, body {
+  html {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
   }
 
   body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: var(--font-sans);
     color: var(--color-ink);
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
   @media (min-width: 768px) {
     body {
       cursor: none;
-      overflow-x: hidden;
-    }
-  }
-
-  @media (max-width: 767px) {
-    body {
-      /* No overflow restriction on mobile to allow native bounce/reload */
     }
   }
 
