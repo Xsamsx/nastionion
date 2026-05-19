@@ -18,6 +18,7 @@
 @layer base {
   html {
     scroll-behavior: auto; /* Handled by Lenis */
+    background-color: var(--color-forest); /* Match top section for seamless overscroll */
   }
 
   body {
