@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Anastasia — SMM & Content Creator" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Anastasia — Social Media Manager, Targeting Specialist & Content Creator" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen relative">
+    <div class="grain"></div>
+    <slot />
+    
+    <script is:inline src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <script is:inline>
+      const lenis = new Lenis({
+        duration: 1.4,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        syncTouch: true,
+      })
+
+      const parallaxElements = document.querySelectorAll("[data-speed]");
+
+      function raf(time) {
+        lenis.raf(time)
+
+        const scrollY = lenis.scroll;
+        parallaxElements.forEach((el) => {
+          const speed = parseFloat(el.getAttribute("data-speed") || "1");
+          const rect = el.getBoundingClientRect();
+          const elementTop = rect.top + scrollY;
+          const yPos = (scrollY - elementTop) * (1 - speed) * 0.5;
+          el.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+
+        requestAnimationFrame(raf)
+      }
+
+      requestAnimationFrame(raf)
+    </script>
+  </body>
+</html>

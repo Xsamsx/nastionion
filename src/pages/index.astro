@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArchLogo from '../components/ArchLogo.astro';
+---
+
+<Layout>
+  <!-- Hero - Forest Green with Parallax and Organic Shapes -->
+  <section class="bg-forest text-cream min-h-screen flex items-center relative overflow-hidden">
+    <!-- Abstract wavy shapes -->
+    <div data-speed="0.8" class="absolute top-10 right-10 w-[400px] h-[400px] bg-sage/20 wavy-border float-slow blur-2xl"></div>
+    <div data-speed="1.2" class="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-terracotta/20 wavy-border float-slow blur-3xl" style="animation-delay: -3s;"></div>
+    
+    <!-- Spinning sun / text -->
+    <div data-speed="0.9" class="absolute top-1/4 right-[15%] hidden lg:block opacity-60">
+      <svg class="spin-slow w-48 h-48 text-sunflower" viewBox="0 0 200 200">
+        <path id="textPath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="none" />
+        <text class="text-xs uppercase tracking-widest fill-current font-sans">
+          <textPath href="#textPath" startOffset="0%">good vibes · creative energy · social media · </textPath>
+        </text>
+        <!-- Center star/flower -->
+        <path d="M100 75 Q100 100 125 100 Q100 100 100 125 Q100 100 75 100 Q100 100 100 75" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 py-24 relative z-10 w-full">
+      <div class="section-fade" style="animation-delay: 0s">
+        <svg class="mb-12 w-12 h-14 text-sunflower" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 46 C4 20, 20 4, 20 4 C20 4, 36 20, 36 46" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+        <div data-speed="1.05">
+          <h1 class="text-6xl md:text-8xl tracking-tight mb-6 font-serif italic text-ivory drop-shadow-sm">Anastasia</h1>
+        </div>
+        <div data-speed="1.1">
+          <p class="text-sage text-2xl md:text-3xl mb-12 font-sans font-light">SMM · Targeting · Content Creator</p>
+          <div class="flex flex-wrap gap-4 font-sans">
+            <span class="px-5 py-2 border border-sage/40 rounded-full text-sm tracking-wider uppercase backdrop-blur-sm bg-forest/30">Kyiv, Ukraine</span>
+            <span class="px-5 py-2 border border-terracotta/40 text-terracotta rounded-full text-sm tracking-wider uppercase backdrop-blur-sm bg-forest/30">Available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About - Cream with asymmetrical layout -->
+  <section class="bg-cream pt-40 pb-32 relative overflow-hidden text-ink">
+    <!-- Wavy top separator -->
+    <div class="absolute top-0 left-0 w-full text-forest">
+      <svg viewBox="0 0 1440 120" class="w-full h-[80px] fill-current" preserveAspectRatio="none">
+        <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+      </svg>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-4" data-speed="0.95">
+          <p class="text-sm text-terracotta tracking-widest uppercase mb-4 border-b border-terracotta/30 pb-2 inline-block">The Vision</p>
+        </div>
+        <div class="md:col-span-8 section-fade" style="animation-delay: 0.1s" data-speed="1.05">
+          <p class="text-3xl md:text-4xl leading-snug font-serif italic mb-8">
+            Creating meaningful digital presence for brands and individuals.
+          </p>
+          <p class="text-lg md:text-xl text-ink/70 font-sans font-light leading-relaxed">
+            Specializing in social media strategy, targeted advertising,
+            and lifestyle content that <span class="text-terracotta font-medium italic">connects</span> deeply with modern audiences. A blend of aesthetics and analytics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services - Sage / Forest organic cards -->
+  <section class="bg-sage text-forest py-32 relative">
+    <!-- Abstract wavy shape background -->
+    <div class="absolute inset-0 opacity-10">
+      <svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="wavyPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M0 50 Q 25 25, 50 50 T 100 50" fill="none" stroke="currentColor" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#wavyPattern)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-20" data-speed="1.1">
+        <h2 class="text-5xl md:text-6xl font-serif italic text-forest">Expertise</h2>
+        <div class="w-24 h-[1px] bg-forest/30 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          { id: '01', title: 'SMM', desc: 'Strategy, content planning, and authentic community engagement.', color: 'bg-cream' },
+          { id: '02', title: 'Targeting', desc: 'Precise audience mapping and high-conversion ad campaigns.', color: 'bg-terracotta text-cream' },
+          { id: '03', title: 'Content', desc: 'Photography, aesthetic reels, and cohesive brand storytelling.', color: 'bg-forest text-cream' }
+        ].map((service, i) => (
+          <div data-speed={1 + (i * 0.05)} class={`p-10 rounded-[2rem] rounded-tl-none ${service.color} hover:-translate-y-2 transition-transform duration-500 shadow-xl shadow-ink/5`}>
+            <span class="text-sm font-sans tracking-widest opacity-70 mb-8 block">{service.id}</span>
+            <h3 class="text-3xl font-serif mb-4">{service.title}</h3>
+            <p class="font-sans font-light opacity-90">{service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience - Cream -->
+  <section class="bg-cream pt-40 pb-32 relative text-ink">
+    <!-- Wavy top separator -->
+    <div class="absolute top-0 left-0 w-full text-sage">
+      <svg viewBox="0 0 1440 120" class="w-full h-[80px] fill-current" preserveAspectRatio="none">
+        <path d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,58.7C1120,53,1280,75,1360,85.3L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+      </svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <div data-speed="0.95" class="mb-20 text-center">
+        <h2 class="text-5xl md:text-6xl font-serif italic text-burgundy">Journey</h2>
+      </div>
+      
+      <div class="space-y-16 pl-4 md:pl-0 border-l border-terracotta/20 md:border-none relative">
+        <div class="relative md:flex gap-12 items-start" data-speed="1.02">
+          <div class="hidden md:block w-1/4 text-right pt-2">
+            <p class="text-sm text-terracotta font-medium tracking-widest">2023 — Present</p>
+          </div>
+          <div class="absolute -left-[5px] md:static w-3 h-3 rounded-full bg-terracotta mt-2 shrink-0 md:mt-3 shadow-[0_0_0_4px_rgba(198,125,94,0.2)]"></div>
+          <div class="md:w-3/4 pl-6 md:pl-0">
+            <p class="text-sm text-terracotta font-medium tracking-widest md:hidden mb-2">2023 — Present</p>
+            <h3 class="text-2xl font-serif mb-3">Freelance SMM & Content Creator</h3>
+            <p class="text-ink/70 font-light font-sans">Working with lifestyle brands, personal brands, and small businesses to elevate their digital footprint through organic aesthetics.</p>
+          </div>
+        </div>
+
+        <div class="relative md:flex gap-12 items-start" data-speed="1.05">
+          <div class="hidden md:block w-1/4 text-right pt-2">
+            <p class="text-sm text-sage font-medium tracking-widest">2022 — 2023</p>
+          </div>
+          <div class="absolute -left-[5px] md:static w-3 h-3 rounded-full bg-sage mt-2 shrink-0 md:mt-3 shadow-[0_0_0_4px_rgba(125,155,132,0.2)]"></div>
+          <div class="md:w-3/4 pl-6 md:pl-0">
+            <p class="text-sm text-sage font-medium tracking-widest md:hidden mb-2">2022 — 2023</p>
+            <h3 class="text-2xl font-serif mb-3">Social Media Manager</h3>
+            <p class="text-ink/70 font-light font-sans">Brand collaboration, campaign management, and establishing visual identity for emerging labels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact - Burgundy with dramatic typography -->
+  <section class="bg-burgundy text-cream py-32 relative overflow-hidden">
+    <div data-speed="0.8" class="absolute -top-40 -right-40 w-96 h-96 bg-terracotta/20 rounded-full blur-3xl"></div>
+    <div data-speed="1.2" class="absolute -bottom-20 -left-20 w-80 h-80 bg-forest/30 rounded-full blur-3xl"></div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div data-speed="1.05">
+        <p class="text-sm text-sunflower tracking-widest uppercase mb-6 font-sans">Співпраця</p>
+        <h2 class="text-5xl md:text-7xl font-serif italic mb-8">Let's Create Magic</h2>
+        <p class="text-cream/80 mb-16 max-w-lg mx-auto font-sans font-light text-lg">
+          Open to collaborations, brand partnerships, and new creative projects that push boundaries.
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-6 font-sans">
+          <a href="https://instagram.com/nastion" target="_blank" rel="noopener"
+             class="group relative px-8 py-4 bg-cream text-burgundy rounded-full overflow-hidden">
+            <span class="relative z-10 font-medium tracking-wide">Instagram</span>
+            <div class="absolute inset-0 h-full w-full bg-sunflower scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
+          </a>
+          <a href="mailto:hello@anastasia.com"
+             class="group relative px-8 py-4 border border-cream/30 rounded-full overflow-hidden">
+             <span class="relative z-10 text-cream group-hover:text-ink transition-colors duration-300 tracking-wide">Email</span>
+             <div class="absolute inset-0 h-full w-full bg-cream scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
+          </a>
+          <a href="https://t.me/nastion" target="_blank" rel="noopener"
+             class="group relative px-8 py-4 border border-cream/30 rounded-full overflow-hidden">
+             <span class="relative z-10 text-cream group-hover:text-ink transition-colors duration-300 tracking-wide">Telegram</span>
+             <div class="absolute inset-0 h-full w-full bg-cream scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-ink text-cream/40 py-10">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm font-sans gap-4">
+      <p class="tracking-widest uppercase text-xs">© 2026 Anastasia. All rights reserved.</p>
+      <svg class="w-8 h-10 text-sage opacity-50" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 46 C4 20, 20 4, 20 4 C20 4, 36 20, 36 46" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+      <p class="tracking-widest uppercase text-xs hidden md:block">Designed with Intention</p>
+    </div>
+  </footer>
+</Layout>
+
