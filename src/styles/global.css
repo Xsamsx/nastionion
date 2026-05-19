@@ -18,12 +18,16 @@
 @layer base {
   html {
     height: 100%;
+    margin: 0;
+    padding: 0;
     scroll-behavior: auto; /* Handled by Lenis */
     background-color: #1E3A2F !important;
   }
 
   body {
     min-height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: var(--font-sans);
     background-color: #1E3A2F !important;
     color: var(--color-ink);
@@ -39,7 +43,7 @@
 
   @media (max-width: 767px) {
     body {
-      overflow-x: clip; /* Prevent horizontal scroll but allow vertical bounce */
+      /* No overflow restriction on mobile to allow native bounce/reload */
     }
   }
 
