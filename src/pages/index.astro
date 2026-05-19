@@ -5,9 +5,9 @@ import ArchLogo from '../components/ArchLogo.astro';
 
 <Layout>
   <!-- Hero - Forest Green with Parallax and Organic Shapes -->
-  <section class="bg-forest text-cream min-h-[100dvh] flex items-center relative overflow-hidden">
+  <section class="bg-forest text-cream min-h-[100dvh] flex items-center relative overflow-hidden" style="background-color: #1E3A2F;">
     <!-- WebGL Background (z-0) -->
-    <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-[100dvh] pointer-events-none z-0"></canvas>
+    <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-[100dvh] pointer-events-none z-0" style="background: transparent;"></canvas>
 
     <!-- Abstract wavy shapes -->
     <div data-speed="0.8" class="absolute top-10 right-10 w-[400px] h-[400px] bg-sage/20 wavy-border float-slow blur-2xl"></div>
@@ -26,7 +26,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <div class="max-w-5xl mx-auto px-6 py-16 md:py-24 relative z-20 w-full flex flex-col justify-start mt-10 md:mt-20">
-      <div class="section-fade" style="animation-delay: 0s">
+      <div class="opacity-0 animate-fade-up" style="animation-fill-mode: forwards;">
         <svg class="mb-10 w-12 h-14 text-sunflower" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 46 C4 20, 20 4, 20 4 C20 4, 36 20, 36 46" stroke="currentColor" stroke-width="2" fill="none"/>
         </svg>

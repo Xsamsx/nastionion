@@ -74,6 +74,10 @@
     fill: none;
   }
 
+  .animate-fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+
   .section-fade {
     animation: fadeUp 0.8s ease-out forwards;
     opacity: 0;
