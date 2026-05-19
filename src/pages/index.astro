@@ -25,7 +25,7 @@ import ArchLogo from '../components/ArchLogo.astro';
       </svg>
     </div>
 
-    <div class="max-w-5xl mx-auto px-6 py-24 relative z-20 w-full flex flex-col justify-start mt-20">
+    <div class="max-w-5xl mx-auto px-6 py-16 md:py-24 relative z-20 w-full flex flex-col justify-start mt-10 md:mt-20">
       <div class="section-fade" style="animation-delay: 0s">
         <svg class="mb-10 w-12 h-14 text-sunflower" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 46 C4 20, 20 4, 20 4 C20 4, 36 20, 36 46" stroke="currentColor" stroke-width="2" fill="none"/>
@@ -43,7 +43,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <!-- Available for projects - Left side (elevated) -->
-    <div class="absolute bottom-62 left-0 px-8 md:px-12 flex items-end z-20 font-sans text-xs tracking-widest uppercase text-cream/60">
+    <div class="absolute bottom-28 md:bottom-62 left-0 px-6 md:px-12 flex items-end z-20 font-sans text-[10px] md:text-xs tracking-widest uppercase text-cream/60">
       <div class="flex flex-col gap-3 pb-2" data-speed="1.02">
         <span class="flex items-center gap-3 text-cream/80">
           <span class="relative flex h-2.5 w-2.5">
@@ -58,7 +58,7 @@ import ArchLogo from '../components/ArchLogo.astro';
 
     <!-- Social links - Right side (original position) -->
     <div class="absolute bottom-10 right-0 px-8 md:px-12 flex items-end z-20 font-sans text-xs tracking-widest uppercase text-cream/60">
-      <div class="hidden md:flex flex-col gap-3 pb-2 text-right" data-speed="1.02">
+      <div class="flex flex-row md:flex-col gap-6 md:gap-3 pb-2 text-right" data-speed="1.02">
         <a href="https://instagram.com/nastion" target="_blank" rel="noopener" class="hover:text-sunflower transition-colors duration-300">Instagram</a>
         <a href="https://t.me/nastion" target="_blank" rel="noopener" class="hover:text-sunflower transition-colors duration-300">Telegram</a>
       </div>
@@ -72,7 +72,7 @@ import ArchLogo from '../components/ArchLogo.astro';
   </section>
 
   <!-- About - Cream with asymmetrical layout -->
-  <section class="bg-cream pt-40 pb-32 relative overflow-hidden text-ink">
+  <section class="bg-cream pt-24 pb-20 md:pt-40 md:pb-32 relative overflow-hidden text-ink">
     <!-- Wavy top separator -->
     <div class="absolute top-0 left-0 w-full text-forest">
       <svg viewBox="0 0 1440 120" class="w-full h-[80px] fill-current" preserveAspectRatio="none">
@@ -81,7 +81,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <div class="max-w-5xl mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-12 gap-12 items-center">
+      <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
         <div class="md:col-span-4" data-speed="0.95">
           <p class="text-sm text-terracotta tracking-widest uppercase mb-4 border-b border-terracotta/30 pb-2 inline-block">The Vision</p>
         </div>
@@ -99,7 +99,7 @@ import ArchLogo from '../components/ArchLogo.astro';
   </section>
 
   <!-- Services - Sage / Forest organic cards -->
-  <section class="bg-sage text-forest py-32 relative">
+  <section class="bg-sage text-forest py-20 md:py-32 relative">
     <!-- Abstract wavy shape background -->
     <div class="absolute inset-0 opacity-10">
       <svg width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,18 +113,18 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <div class="max-w-6xl mx-auto px-6 relative z-10">
-      <div class="text-center mb-20">
+      <div class="text-center mb-16 md:mb-20">
         <h2 class="text-5xl md:text-6xl font-serif italic text-forest">Expertise</h2>
         <div class="w-24 h-[1px] bg-forest/30 mx-auto mt-6"></div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
         {[
           { id: '01', title: 'SMM', desc: 'Strategy, content planning, and authentic community engagement.', color: 'bg-cream' },
           { id: '02', title: 'Targeting', desc: 'Precise audience mapping and high-conversion ad campaigns.', color: 'bg-terracotta text-cream' },
           { id: '03', title: 'Content', desc: 'Photography, aesthetic reels, and cohesive brand storytelling.', color: 'bg-forest text-cream' }
         ].map((service, i) => (
-          <div class={`service-card p-10 rounded-[2rem] rounded-tl-none ${service.color} transition-all duration-300 shadow-xl shadow-ink/5 hover:-translate-y-2 hover:shadow-2xl`}>
+          <div class={`service-card p-8 md:p-10 rounded-[2rem] rounded-tl-none ${service.color} transition-all duration-300 shadow-xl shadow-ink/5 hover:-translate-y-2 hover:shadow-2xl`}>
             <span class="text-sm font-sans tracking-widest opacity-70 mb-8 block">{service.id}</span>
             <h3 class="text-3xl font-serif mb-4">{service.title}</h3>
             <p class="font-sans font-light opacity-90">{service.desc}</p>
@@ -186,7 +186,7 @@ import ArchLogo from '../components/ArchLogo.astro';
   </section>
 
   <!-- Experience - Cream -->
-  <section class="bg-cream pt-40 pb-32 relative text-ink">
+  <section class="bg-cream pt-24 pb-20 md:pt-40 md:pb-32 relative text-ink">
     <!-- Wavy top separator -->
     <div class="absolute top-0 left-0 w-full text-sage">
       <svg viewBox="0 0 1440 120" class="w-full h-[80px] fill-current" preserveAspectRatio="none">
@@ -195,13 +195,13 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <div class="max-w-4xl mx-auto px-6 relative z-10">
-      <div data-speed="0.95" class="mb-20 text-center">
+      <div data-speed="0.95" class="mb-16 md:mb-20 text-center">
         <h2 class="text-5xl md:text-6xl font-serif italic text-burgundy">Journey</h2>
       </div>
       
       <div class="space-y-8 pl-4 md:pl-0 border-l border-terracotta/20 md:border-none relative">
         <div data-speed="1.02">
-          <div class="relative md:flex gap-12 items-start tilt-card p-8 rounded-[2rem] hover:bg-white/40 transition-all duration-300 border border-transparent hover:border-white/60 shadow-none hover:shadow-xl" style="transform-style: preserve-3d;">
+          <div class="relative md:flex gap-12 items-start tilt-card p-6 md:p-8 rounded-[2rem] hover:bg-white/40 transition-all duration-300 border border-transparent hover:border-white/60 shadow-none hover:shadow-xl" style="transform-style: preserve-3d;">
             <div class="hidden md:block w-1/4 text-right pt-2" style="transform: translateZ(20px);">
               <p class="text-sm text-terracotta font-medium tracking-widest">2023 — Present</p>
             </div>
@@ -215,7 +215,7 @@ import ArchLogo from '../components/ArchLogo.astro';
         </div>
 
         <div data-speed="1.05">
-          <div class="relative md:flex gap-12 items-start tilt-card p-8 rounded-[2rem] hover:bg-white/40 transition-all duration-300 border border-transparent hover:border-white/60 shadow-none hover:shadow-xl" style="transform-style: preserve-3d;">
+          <div class="relative md:flex gap-12 items-start tilt-card p-6 md:p-8 rounded-[2rem] hover:bg-white/40 transition-all duration-300 border border-transparent hover:border-white/60 shadow-none hover:shadow-xl" style="transform-style: preserve-3d;">
             <div class="hidden md:block w-1/4 text-right pt-2" style="transform: translateZ(20px);">
               <p class="text-sm text-sage font-medium tracking-widest">2022 — 2023</p>
             </div>
@@ -232,7 +232,7 @@ import ArchLogo from '../components/ArchLogo.astro';
   </section>
 
   <!-- Contact - Burgundy with dramatic typography -->
-  <section class="bg-burgundy text-cream py-32 relative overflow-hidden">
+  <section class="bg-burgundy text-cream py-20 md:py-32 relative overflow-hidden">
     <!-- 3D Canvas for contact section -->
     <canvas id="contact-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
@@ -249,17 +249,17 @@ import ArchLogo from '../components/ArchLogo.astro';
         
         <div class="flex flex-wrap justify-center gap-6 font-sans">
           <a href="https://instagram.com/nastion" target="_blank" rel="noopener"
-             class="magnetic group relative px-8 py-4 bg-cream text-burgundy rounded-full overflow-hidden">
+             class="magnetic group relative w-full md:w-auto px-8 py-4 bg-cream text-burgundy rounded-full overflow-hidden block md:inline-block">
             <span class="relative z-10 font-medium tracking-wide">Instagram</span>
             <div class="absolute inset-0 h-full w-full bg-sunflower scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
           </a>
           <a href="mailto:hello@anastasia.com"
-             class="magnetic group relative px-8 py-4 border border-cream/30 rounded-full overflow-hidden">
+             class="magnetic group relative w-full md:w-auto px-8 py-4 border border-cream/30 rounded-full overflow-hidden block md:inline-block">
              <span class="relative z-10 text-cream group-hover:text-ink transition-colors duration-300 tracking-wide">Email</span>
              <div class="absolute inset-0 h-full w-full bg-cream scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
           </a>
           <a href="https://t.me/nastion" target="_blank" rel="noopener"
-             class="magnetic group relative px-8 py-4 border border-cream/30 rounded-full overflow-hidden">
+             class="magnetic group relative w-full md:w-auto px-8 py-4 border border-cream/30 rounded-full overflow-hidden block md:inline-block">
              <span class="relative z-10 text-cream group-hover:text-ink transition-colors duration-300 tracking-wide">Telegram</span>
              <div class="absolute inset-0 h-full w-full bg-cream scale-x-0 group-hover:scale-x-100 transition-transform origin-left ease-out duration-300"></div>
           </a>
