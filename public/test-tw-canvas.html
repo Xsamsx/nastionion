@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1E3A2F">
+<style>
+/* Tailwind preflight */
+html,:host{-webkit-text-size-adjust:100%;tab-size:4;line-height:1.5;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#1E3A2F;min-height:100%}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;color:#F5F2ED;font-family:system-ui;font-size:1.5rem;position:relative;overflow:hidden}
+.s1{background:#1E3A2F}
+.s2{background:#F5F2ED;color:#1A1A1A}
+.s3{background:#7D9B84}
+.s4{background:#6B2D3C}
+canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+h1{position:relative;z-index:10}
+</style>
+</head>
+<body>
+<div class="section s1">
+  <canvas id="c"></canvas>
+  <h1>TEST: Tailwind + Canvas</h1>
+</div>
+<div class="section s2"><h1>Section 2</h1></div>
+<div class="section s3"><h1>Section 3</h1></div>
+<div class="section s4"><h1>Section 4</h1></div>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+ctx.fillStyle = 'rgba(125,155,132,0.3)';
+ctx.arc(c.width/2, c.height/2, 150, 0, Math.PI*2);
+ctx.fill();
+</script>
+</body>
+</html>
