@@ -34,16 +34,13 @@
     padding: 0;
     width: 100%;
     min-width: 100%;
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
+    min-height: 100%;
     font-family: var(--font-sans);
     color: var(--color-ink);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
     background-color: #1E3A2F;
     -webkit-text-size-adjust: 100%;
-    overscroll-behavior-y: none;
   }
 
   @media (min-width: 768px) {
