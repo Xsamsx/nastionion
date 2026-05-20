@@ -1,4 +1,21 @@
-@import "tailwindcss";
+/* Skip Tailwind's preflight, use our own reset */
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+/* Our own minimal reset that works with iOS Safari */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  line-height: inherit;
+}
 
 @theme {
   --color-cream: #F5F2ED;
