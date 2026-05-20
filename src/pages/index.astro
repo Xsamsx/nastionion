@@ -43,7 +43,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <!-- Available for projects - Left side (elevated) -->
-    <div class="absolute bottom-12 md:bottom-62 left-0 px-8 md:px-12 flex items-end z-20 font-sans text-[10px] md:text-xs tracking-widest uppercase text-cream/60">
+    <div class="absolute md:bottom-62 left-0 px-8 md:px-12 flex items-end z-20 font-sans text-[10px] md:text-xs tracking-widest uppercase text-cream/60" style="bottom: calc(3rem + env(safe-area-inset-bottom));">
       <div class="flex flex-col gap-3 pb-2" data-speed="1.02">
         <span class="flex items-center gap-3 text-cream/80">
           <span class="relative flex h-2.5 w-2.5">
@@ -57,7 +57,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <!-- Social links - Right side (original position) -->
-    <div class="absolute bottom-12 md:bottom-10 right-0 px-8 md:px-12 flex items-end z-20 font-sans text-[10px] md:text-xs tracking-widest uppercase text-cream/60">
+    <div class="absolute md:bottom-10 right-0 px-8 md:px-12 flex items-end z-20 font-sans text-[10px] md:text-xs tracking-widest uppercase text-cream/60" style="bottom: calc(3rem + env(safe-area-inset-bottom));">
       <div class="flex flex-col gap-3 pb-2 text-right" data-speed="1.02">
         <a href="https://instagram.com/nastion" target="_blank" rel="noopener" class="hover:text-sunflower transition-colors duration-300">Instagram</a>
         <a href="https://t.me/nastion" target="_blank" rel="noopener" class="hover:text-sunflower transition-colors duration-300">Telegram</a>
@@ -65,7 +65,7 @@ import ArchLogo from '../components/ArchLogo.astro';
     </div>
 
     <!-- Scroll Indicator -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 opacity-70">
+    <div class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 opacity-70" style="bottom: env(safe-area-inset-bottom);">
       <span class="text-[10px] uppercase tracking-[0.3em] font-sans text-cream/50">Discover</span>
       <div class="w-[1px] h-16 bg-gradient-to-b from-cream/50 to-transparent"></div>
     </div>
@@ -269,7 +269,7 @@ import ArchLogo from '../components/ArchLogo.astro';
   </section>
 
   <!-- Footer -->
-  <footer class="bg-ink text-cream/40 py-10">
+  <footer class="bg-ink text-cream/40 py-10" style="padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm font-sans gap-4">
       <p class="tracking-widest uppercase text-xs">© 2026 Anastasia. All rights reserved.</p>
       <svg class="w-8 h-10 text-sage opacity-50" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
