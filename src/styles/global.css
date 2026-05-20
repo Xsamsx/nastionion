@@ -232,3 +232,15 @@
     transform: translateY(-20px);
   }
 }
+
+/* iOS Safari edge-to-edge fix - MUST be outside @layer to override Tailwind */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #1E3A2F;
+}
