@@ -61,7 +61,8 @@
 }
 
 @layer components {
-  /* Grain temporarily disabled - position:fixed breaks Safari safe areas */
+  /* Grain disabled - position:fixed breaks Safari safe areas */
+  /* TODO: Find alternative grain approach that works with iOS Safari */
   .grain {
     display: none;
   }
