@@ -1,21 +1,4 @@
-/* Skip Tailwind's preflight, use our own reset */
-@import "tailwindcss/theme";
-@import "tailwindcss/utilities";
-
-/* Our own minimal reset that works with iOS Safari */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
-  tab-size: 4;
-}
-
-body {
-  line-height: inherit;
-}
+@import "tailwindcss";
 
 @theme {
   --color-cream: #F5F2ED;
@@ -250,17 +233,3 @@ body {
   }
 }
 
-/* iOS Safari edge-to-edge fix */
-html {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #1E3A2F !important;
-  min-height: 100% !important;
-}
-
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #1E3A2F !important;
-  min-height: 100% !important;
-}
