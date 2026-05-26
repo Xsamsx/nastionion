@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F5F2ED;
+  --color-nude: #E8D9C1;
   --color-ivory: #FDFBF8;
-  --color-ink: #1A1A1A;
-  --color-forest: #1E3A2F;
-  --color-sage: #7D9B84;
-  --color-terracotta: #C67D5E;
-  --color-burgundy: #6B2D3C;
+  --color-black-off: #1B1B1B;
+  --color-burgundy: #4B1D3F;
+  --color-rose-smoke: #D8A7B1;
+  --color-soft-orchid: #E5D1D9;
   --color-muted: #6B6B6B;
   --color-sunflower: #E1A95F;
 
@@ -17,7 +16,7 @@
 
 @layer base {
   :root {
-    background-color: #1E3A2F;
+    background-color: var(--color-black-off);
   }
 
   html {
@@ -26,7 +25,7 @@
     width: 100%;
     height: 100%;
     min-height: 100%;
-    background-color: #1E3A2F;
+    background-color: var(--color-black-off);
   }
 
   body {
@@ -36,10 +35,10 @@
     min-width: 100%;
     min-height: 100%;
     font-family: var(--font-sans);
-    color: var(--color-ink);
+    color: var(--color-black-off);
     line-height: 1.6;
     overflow-x: clip;
-    background-color: #1E3A2F;
+    background-color: var(--color-black-off);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -151,8 +150,9 @@
     left: 0;
     pointer-events: none;
     z-index: 10000;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
     mix-blend-mode: difference;
+    will-change: transform;
   }
 
   .cursor-dot {
@@ -190,14 +190,6 @@
     }
   }
 
-  /* Safe area helpers for iOS */
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .safe-area-top {
-    padding-top: env(safe-area-inset-top);
-  }
 }
 
 @keyframes marquee {

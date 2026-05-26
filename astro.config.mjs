@@ -8,6 +8,9 @@ export default defineConfig({
   site: 'https://xsamsx.github.io',
   base: '/nastionion',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      chunkSizeWarningLimit: 1500
+    }
   }
 });

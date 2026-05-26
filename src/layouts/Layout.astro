@@ -9,16 +9,72 @@ const { title = "Anastasia — SMM & Content Creator" } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" style="background-color: #1E3A2F;">
+<html lang="en" style="background-color: #1B1B1B;">
   <head>
     <style is:inline>
-      html,body{margin:0!important;padding:0!important;background:#1E3A2F}
+      html,body{margin:0!important;padding:0!important;background:#1B1B1B}
+
+      /* Preloader styles */
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #1B1B1B;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      .preloader.loaded {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .preloader-logo {
+        width: 60px;
+        height: 72px;
+        animation: preloader-pulse 1.5s ease-in-out infinite;
+      }
+      .preloader-logo path {
+        stroke: #D8A7B1;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 120;
+        stroke-dashoffset: 120;
+        animation: preloader-draw 2s ease forwards;
+      }
+      .preloader-text {
+        margin-top: 24px;
+        font-family: system-ui, sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #E8D9C1;
+        opacity: 0.6;
+      }
+      @keyframes preloader-draw {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes preloader-pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.8; }
+      }
+
+      /* Hide content until loaded */
+      .page-content {
+        opacity: 0;
+        transition: opacity 0.6s ease 0.3s;
+      }
+      .page-content.visible {
+        opacity: 1;
+      }
     </style>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/nastionion/favicon.svg" />
     <link rel="apple-touch-icon" href="/nastionion/favicon.svg" />
     <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#1E3A2F" />
+    <meta name="theme-color" content="#1B1B1B" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="description" content="Anastasia — Social Media Manager, Targeting Specialist & Content Creator" />
@@ -29,14 +85,58 @@ const { title = "Anastasia — SMM & Content Creator" } = Astro.props;
 
     <title>{title}</title>
   </head>
-  <body class="relative" style="background-color: #1E3A2F;">
-    <!-- Custom Cursor -->
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
+  <body class="relative" style="background-color: #1B1B1B;">
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <svg class="preloader-logo" viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 46 C4 20, 20 4, 20 4 C20 4, 36 20, 36 46"/>
+      </svg>
+      <div class="preloader-text">Loading</div>
+    </div>
 
-    <div class="grain"></div>
-    <slot />
+    <!-- Page Content -->
+    <div class="page-content" id="page-content">
+      <!-- Custom Cursor -->
+      <div class="cursor-dot hidden md:block"></div>
+      <div class="cursor-outline hidden md:block"></div>
+
+      <div class="grain"></div>
+      <slot />
+    </div>
     
+    <script is:inline>
+      // Preloader logic
+      (function() {
+        const preloader = document.getElementById('preloader');
+        const pageContent = document.getElementById('page-content');
+        const minLoadTime = 1500; // Minimum time to show loader (ms)
+        const startTime = Date.now();
+
+        function hidePreloader() {
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(0, minLoadTime - elapsed);
+
+          setTimeout(() => {
+            preloader.classList.add('loaded');
+            pageContent.classList.add('visible');
+          }, remaining);
+        }
+
+        // Wait for everything to load
+        if (document.fonts && document.fonts.ready) {
+          Promise.all([
+            document.fonts.ready,
+            new Promise(resolve => {
+              if (document.readyState === 'complete') resolve();
+              else window.addEventListener('load', resolve);
+            })
+          ]).then(hidePreloader);
+        } else {
+          window.addEventListener('load', hidePreloader);
+        }
+      })();
+    </script>
+
     <script is:inline src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
     <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script is:inline>
@@ -64,31 +164,36 @@ const { title = "Anastasia — SMM & Content Creator" } = Astro.props;
         const cursorOutline = document.querySelector('.cursor-outline');
         const interactables = document.querySelectorAll('a, button, .magnetic');
 
-        let mouseX = 0;
-        let mouseY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
+        let mouseX = -100;
+        let mouseY = -100;
+        let dotX = -100;
+        let dotY = -100;
+        let outlineX = -100;
+        let outlineY = -100;
 
         window.addEventListener('mousemove', (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
-          
-          // Instantly move the dot
-          cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
         });
 
-        // Animate the outline trailing
-        function animateCursor() {
-          const dx = mouseX - outlineX;
-          const dy = mouseY - outlineY;
-          
-          outlineX += dx * 0.15;
-          outlineY += dy * 0.15;
-          
-          cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
-          requestAnimationFrame(animateCursor);
+        // Optimization: Use a shared lerp function
+        const lerp = (a, b, n) => (1 - n) * a + n * b;
+
+        // Consolidate into the main RAF loop
+        function updateCursor() {
+          // Dot follows fast, outline follows with smooth trail
+          dotX = lerp(dotX, mouseX, 0.6);
+          dotY = lerp(dotY, mouseY, 0.6);
+
+          outlineX = lerp(outlineX, mouseX, 0.25);
+          outlineY = lerp(outlineY, mouseY, 0.25);
+
+          cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+          cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0)`;
+
+          requestAnimationFrame(updateCursor);
         }
-        animateCursor();
+        updateCursor();
 
         // Hover states
         interactables.forEach(el => {
@@ -111,11 +216,14 @@ const { title = "Anastasia — SMM & Content Creator" } = Astro.props;
           
           const scrollY = lenis.scroll;
           parallaxElements.forEach((el) => {
-            const speed = parseFloat(el.getAttribute("data-speed") || "1");
             const rect = el.getBoundingClientRect();
-            const elementTop = rect.top + scrollY;
-            const yPos = (scrollY - elementTop) * (1 - speed) * 0.5;
-            el.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            // Only animate if in viewport (rough check)
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              const speed = parseFloat(el.getAttribute("data-speed") || "1");
+              const elementTop = rect.top + scrollY;
+              const yPos = (scrollY - elementTop) * (1 - speed) * 0.5;
+              el.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            }
           });
         }
         
