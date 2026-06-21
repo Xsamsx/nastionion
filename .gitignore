@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Media sorting working folders — regenerable via scripts/sort-media.sh,
+# not referenced by the site (and _screenshots holds private client screenshots)
+public/media/_unsorted/
+public/media/_screenshots/
+public/media/brands/_unassigned/

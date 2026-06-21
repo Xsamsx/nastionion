@@ -44,7 +44,7 @@
   }
 
   @media (min-width: 769px) {
-    *, *::before, *::after {
+    html, body, *, *::before, *::after {
       cursor: none !important;
     }
   }
@@ -70,6 +70,27 @@
     opacity: 0;
   }
 
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   .spin-slow {
     animation: spin 15s linear infinite;
   }
@@ -93,24 +114,37 @@
     border-radius: 50%;
     mix-blend-mode: difference;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
   }
 
   .cursor-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background-color: #ffffff;
-    margin-top: -4px;
-    margin-left: -4px;
-    transition: opacity 0.2s ease;
+    margin-top: -3px;
+    margin-left: -3px;
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .cursor-dot.cursor-dot-hover {
+    width: 4px;
+    height: 4px;
+    opacity: 0.5;
   }
 
   .cursor-outline {
     width: 40px;
     height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
     margin-top: -20px;
     margin-left: -20px;
-    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, background-color 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                height 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                margin 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                background-color 0.4s ease,
+                border-color 0.4s ease;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
   }
 
   .cursor-outline.cursor-hover {
@@ -119,6 +153,7 @@
     margin-top: -30px;
     margin-left: -30px;
     background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
   }
 
   @media (max-width: 768px) {
@@ -159,4 +194,20 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes folderOpen {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
