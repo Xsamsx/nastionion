@@ -1,8 +1,17 @@
-import { useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { CustomCursor } from './components/CustomCursor'
-import { ThreeBackground } from './components/ThreeBackground'
-import { ContactThreeBackground } from './components/ContactThreeBackground'
 import { Preloader } from './components/Preloader'
+
+// The Three.js scenes are decorative and pull in ~125KB gzip of WebGL engine.
+// Lazy-load them so they never block first paint, and only mount once the
+// browser is idle (see useDeferredMount) so the chunk downloads after the page
+// is interactive.
+const ThreeBackground = lazy(() =>
+  import('./components/ThreeBackground').then((m) => ({ default: m.ThreeBackground }))
+)
+const ContactThreeBackground = lazy(() =>
+  import('./components/ContactThreeBackground').then((m) => ({ default: m.ContactThreeBackground }))
+)
 import { CollabFolders } from './components/CollabFolders'
 import { AutoReel } from './components/Reels'
 import { Reveal } from './components/Reveal'
@@ -31,9 +40,26 @@ function FAQItem({ q, a }: { q: string, a: string }) {
   )
 }
 
+// Flip to true once the browser is idle, so heavy decorative work (the WebGL
+// backgrounds) is deferred until after the page has painted and is interactive.
+function useDeferredMount(): boolean {
+  const [ready, setReady] = useState(false)
+  useEffect(() => {
+    const ric = window.requestIdleCallback
+    if (typeof ric === 'function') {
+      const id = ric(() => setReady(true))
+      return () => window.cancelIdleCallback(id)
+    }
+    const id = window.setTimeout(() => setReady(true), 200)
+    return () => window.clearTimeout(id)
+  }, [])
+  return ready
+}
+
 function App() {
   const [lang, setLang] = useState<'en' | 'ua'>('en')
   const [isLoading, setIsLoading] = useState(true)
+  const showThree = useDeferredMount()
   const t = translations[lang]
 
   // Flatten every brand's reels into one rail (brands without media just show as names).
@@ -78,8 +104,12 @@ function App() {
 
       {/* Hero */}
       <section id="top" className="bg-black-off text-nude min-h-screen min-h-dvh flex items-center relative overflow-x-clip overflow-y-visible" style={{ backgroundColor: '#1B1B1B' }}>
-        {/* Three.js Background */}
-        <ThreeBackground id="hero-3d-canvas" />
+        {/* Three.js Background — deferred + lazy so it never blocks first paint */}
+        {showThree && (
+          <Suspense fallback={null}>
+            <ThreeBackground id="hero-3d-canvas" />
+          </Suspense>
+        )}
 
         {/* The Portal Arch (Logo Motif) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vh] opacity-[0.05] pointer-events-none z-30" style={{ height: '140%' }}>
@@ -466,7 +496,11 @@ function App() {
 
       {/* Contact */}
       <section id="contact" className="bg-burgundy text-nude py-20 md:py-32 relative overflow-hidden">
-        <ContactThreeBackground />
+        {showThree && (
+          <Suspense fallback={null}>
+            <ContactThreeBackground />
+          </Suspense>
+        )}
         <div className="absolute -top-20 -right-20 w-[50vw] h-[50vw] rounded-full opacity-20 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(216,167,177,0.5) 0%, transparent 60%)' }} />
         <div className="absolute -bottom-20 -left-20 w-[40vw] h-[40vw] rounded-full opacity-15 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(27,27,27,0.4) 0%, transparent 60%)' }} />
 

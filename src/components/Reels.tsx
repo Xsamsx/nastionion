@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { asset } from '../lib/asset'
+import { asset, bestVideo } from '../lib/asset'
 
 /**
  * A vertical reel that autoplays muted + looping only while it's in view, and
@@ -40,7 +40,7 @@ export function AutoReel({
   return (
     <video
       ref={ref}
-      src={asset(src)}
+      src={bestVideo(src)}
       poster={poster ? asset(poster) : undefined}
       muted
       loop
