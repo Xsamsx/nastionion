@@ -5,30 +5,36 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [isExit, setIsExit] = useState(false)
 
   useEffect(() => {
-    // Simulate loading progress
-    const duration = 2000 // 2 seconds
-    const interval = 20
-    const step = 100 / (duration / interval)
+    // Dismiss as soon as the page is actually paint-ready (fonts loaded),
+    // keeping a brief brand flash and a hard cap so it never hangs. This
+    // replaces the old fixed ~2.3s fake timer.
+    const MIN = 400  // minimum brand flash so it doesn't blink awkwardly
+    const CAP = 1500 // never block longer than this, even if fonts stall
+    const start = performance.now()
 
-    const timer = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(timer)
-          return 100
-        }
-        return prev + step
-      })
-    }, interval)
-
-    const timeout = setTimeout(() => {
-      setIsExit(true)
-      setTimeout(onComplete, 800) // Wait for exit animation
-    }, duration + 500)
-
-    return () => {
-      clearInterval(timer)
-      clearTimeout(timeout)
+    let ready = false
+    const fontsReady = (document as Document & { fonts?: FontFaceSet }).fonts?.ready
+    if (fontsReady) {
+      fontsReady.then(() => { ready = true })
+    } else {
+      ready = true
     }
+
+    let raf = 0
+    const tick = (now: number) => {
+      const elapsed = now - start
+      setProgress(Math.min(100, (elapsed / CAP) * 100))
+      if ((ready && elapsed >= MIN) || elapsed >= CAP) {
+        setProgress(100)
+        setIsExit(true)
+        setTimeout(onComplete, 700) // matches the exit transition (duration-700)
+        return
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+
+    return () => cancelAnimationFrame(raf)
   }, [onComplete])
 
   return (

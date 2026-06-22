@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { asset } from '../lib/asset'
+import { useEffect, useRef, useState } from 'react'
+import { asset, bestVideo } from '../lib/asset'
 
 type Stat = { label: string; value: string }
 type Media = { type: 'image' | 'video'; src: string; poster?: string }
@@ -17,6 +17,51 @@ type Collab = {
 // 404 shows as nothing instead of a broken thumbnail.
 const hideOnError = (e: { currentTarget: { style: { display: string } } }) => {
   e.currentTarget.style.display = 'none'
+}
+
+// A card cover that autoplays a muted, looping reel only while it's on screen
+// (and pauses otherwise, so a grid of cards never hammers the browser). The
+// poster shows until playback starts; if the video 404s we fall back to it.
+function CoverReel({ src, poster, alt }: { src: string; poster?: string; alt: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const [broken, setBroken] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.play().catch(() => {})
+        else el.pause()
+      },
+      { threshold: 0.4 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const cls =
+    'absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105'
+
+  if (broken) {
+    return poster ? (
+      <img src={asset(poster)} alt={alt} loading="lazy" onError={hideOnError} className={cls} />
+    ) : null
+  }
+
+  return (
+    <video
+      ref={ref}
+      src={bestVideo(src)}
+      poster={poster ? asset(poster) : undefined}
+      muted
+      loop
+      playsInline
+      preload="none"
+      onError={() => setBroken(true)}
+      className={cls}
+    />
+  )
 }
 
 // Country flag from the category string (works for EN + UA). Only US & Canada
@@ -58,7 +103,9 @@ export function CollabFolders({ items, labels }: { items: Collab[]; labels: Labe
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-7">
         {items.map((item, i) => {
-          // Lead with the client's own content: poster of the first video, or first image.
+          // Lead with the client's own content. Prefer an autoplaying video cover;
+          // otherwise fall back to a poster/image still, then a tinted placeholder.
+          const coverVideo = item.media.find((m) => m.type === 'video' && m.src)
           const coverItem = item.media.find((m) => m.poster || m.type === 'image')
           const coverSrc = coverItem ? (coverItem.type === 'video' ? coverItem.poster : coverItem.src) : null
           return (
@@ -69,8 +116,10 @@ export function CollabFolders({ items, labels }: { items: Collab[]; labels: Labe
               aria-label={item.name}
               className="group relative aspect-[3/4] rounded-[1.5rem] overflow-hidden text-left border border-nude/10 shadow-xl transition-transform duration-500 ease-out hover:-translate-y-1 focus:outline-none"
             >
-              {/* Cover — their actual content, or a tinted fallback if no media yet */}
-              {coverSrc ? (
+              {/* Cover — autoplaying reel, else a still image, else a tinted fallback */}
+              {coverVideo ? (
+                <CoverReel src={coverVideo.src} poster={coverVideo.poster ?? coverSrc ?? undefined} alt={item.name} />
+              ) : coverSrc ? (
                 <img
                   src={asset(coverSrc)}
                   alt={item.name}
@@ -186,7 +235,7 @@ export function CollabFolders({ items, labels }: { items: Collab[]; labels: Labe
                       m.type === 'video' ? (
                         <video
                           key={j}
-                          src={asset(m.src)}
+                          src={bestVideo(m.src)}
                           poster={m.poster ? asset(m.poster) : undefined}
                           controls
                           playsInline
